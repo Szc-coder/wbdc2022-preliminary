@@ -9,18 +9,19 @@ def parse_args():
     parser.add_argument('--dropout', type=float, default=0.3, help='dropout ratio')
 
     # ========================= Data Configs ==========================
-    parser.add_argument('--train_annotation', type=str, default='../data/annotations/labeled.json')
-    parser.add_argument('--test_annotation', type=str, default='../data/annotations/test_b.json')
-    parser.add_argument('--unlable_zip_feats', type=str, default='../data/annotations/unlabeled.json')
-    parser.add_argument('--unlable_ann', type=str, default='../data/annotations/unlabeled.json')
+    parser.add_argument('--train_annotation', type=str, default='data/annotations/labeled.json')
+    parser.add_argument('--train_zip_feats', type=str, default='data/zip_feats/labeled.zip')
+ 
+    parser.add_argument('--test_annotation', type=str, default='data/annotations/test_b.json')
+    parser.add_argument('--test_zip_feats', type=str, default='data/zip_feats/test_b.zip')
+    
+    parser.add_argument('--unlable_ann', type=str, default='data/annotations/unlabeled.json')
+    parser.add_argument('--unlable_zip_feats', type=str, default='data/zip_feats/unlabeled.zip')
 
-    parser.add_argument('--train_zip_feats', type=str, default='../data/zip_feats/labeled.zip')
-    parser.add_argument('--test_zip_feats', type=str, default='../data/zip_feats/test_b.zip')
-
-    parser.add_argument('--test_output_csv', type=str, default='../result.csv')
+    parser.add_argument('--test_output_csv', type=str, default='result.csv')
 
     # ========================= 5F data Configs ==========================
-    parser.add_argument('--convert_labeled_path', type=str, default='../data/convert_labeled.json')
+    parser.add_argument('--convert_labeled_path', type=str, default='data/annotations/convert_labeled.json')
     
 
     parser.add_argument('--val_ratio', default=0., type=float, help='split 10 percentages of training data as validation')
@@ -31,8 +32,7 @@ def parse_args():
     parser.add_argument('--num_workers', default=4, type=int, help="num_workers for dataloaders")
 
     # ======================== SavedModel Configs =========================
-    parser.add_argument('--savedmodel_path', type=str, default='../data/models/model5k/')
-    parser.add_argument('--ckpt_file', type=str, default='../autodl-tmp/save/double/model_epoch_2.bin')
+    parser.add_argument('--savedmodel_path', type=str, default='data/models/model5k')
     parser.add_argument('--best_score', default=0.5, type=float, help='save checkpoint if mean_f1 > best_score')
 
     # ========================= Learning Configs ==========================
@@ -68,9 +68,10 @@ def parse_args():
     # ========================== update Code ==============================
     parser.add_argument('--is_pretrain', type=bool, default=False, help="is pertrain")
     parser.add_argument('--model_name', type=str, default="model")
-    parser.add_argument('--pertrain_mode_path_part1', type=str, default="../data/models/pertrain_part1/")
-    parser.add_argument('--pertrain_mode_path_part2', type=str, default="../data/models/pertrain_part2/")
+    parser.add_argument('--pertrain_mode_path_part1', type=str, default="data/models/pertrain_part1")
+    parser.add_argument('--pertrain_mode_path_part2', type=str, default="data/models/pertrain_part2")
     parser.add_argument('--part2_pertrain', type=bool, default=False)
     parser.add_argument('--double_attck', type=bool, default=False)
+    parser.add_argument('--is_alldata', type=bool, default=True)
 
     return parser.parse_args()

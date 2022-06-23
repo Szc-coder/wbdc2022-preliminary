@@ -11,10 +11,8 @@ def convert_data(ann_path):
                 ocr += k['text']+'。'
             i['ocr'] = ocr
             labeledData_convert.append(i)
-        out_file = open('convert_labeled.json', 'w')
-        json.dump(labeledData_convert, out_file)
-        out_file.close()
-    f.close()
+            
+    with open(os.path.join(ann_path, 'convert_labeled.json'), 'w')as f2:
+        json.dump(labeledData_convert, f2)
 
-
-convert_data('/root/autodl-tmp/data/annotations/')
+convert_data('data/annotations/')

@@ -3,7 +3,6 @@ pandas==1.4.2
 scikit_learn==1.1.1
 scipy==1.8.1
 smart_pytorch==0.0.3
-tensorflow==2.9.1
 timm==0.5.4
 torch==1.7.0+cu110
 torch_ema==0.3

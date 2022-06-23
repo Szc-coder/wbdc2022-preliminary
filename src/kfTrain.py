@@ -201,6 +201,7 @@ def kf_train(args, train_df, val_df, k):
     train_dataloader, val_dataloader = create_k_dataloaders(args, train_df, val_df)
 
     if args.model_name == 'model':
+        print('**********************loading pretrain model**********************')
         model = MultiModal(args)
         checkpoint = torch.load(os.path.join(args.pertrain_mode_path_part2 ,'pretrain_epoch_3.bin'), map_location='cpu')
         model.load_state_dict({'module.'+k:v for k,v in checkpoint['model_state_dict'].items()}, False)
@@ -236,6 +237,8 @@ def kf_train(args, train_df, val_df, k):
 
                 t.set_postfix(mean_loss=(sum(mean_loss)/len(mean_loss)).item(), mean_acc=(sum(mean_acc)/len(mean_acc)).item())
                 t.update(1)
+                
+                step += 1
                 if step % 100 == 0:
                     mean_loss.clear()
                     mean_acc.clear()

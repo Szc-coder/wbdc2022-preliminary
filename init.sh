@@ -4,4 +4,4 @@ CURDIR=$(cd "$(dirname "$0")"; pwd)
 ln -s ${CURDIR}/data/ ${CURDIR}/src/data
 
 cd src/
-python convert_data.python
+python convert_data.py

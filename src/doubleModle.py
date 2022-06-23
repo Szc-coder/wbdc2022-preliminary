@@ -66,21 +66,12 @@ class ALBEF(nn.Module):
         label = label.squeeze(dim=1)
         # loss
         loss = F.cross_entropy(prediction, label)
+        
         with torch.no_grad():
             pred_label_id = torch.argmax(prediction, dim=1)
             accuracy = (label == pred_label_id).float().sum() / label.shape[0]
         return [loss, accuracy, pred_label_id, label]
 
-
-    @staticmethod
-    def cal_loss(prediction, label):
-        label = label.squeeze(dim=1)
-        # loss
-        loss = F.cross_entropy(prediction, label)
-        with torch.no_grad():
-            pred_label_id = torch.argmax(prediction, dim=1)
-            accuracy = (label == pred_label_id).float().sum() / label.shape[0]
-        return [loss, accuracy, pred_label_id, label]
     
     def share_cross_attention(self, model):
             

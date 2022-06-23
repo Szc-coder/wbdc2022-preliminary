@@ -9,7 +9,6 @@ from data_helper import create_dataloaders
 from model import MultiModal
 from util import setup_device, setup_seed, setup_logging, build_optimizer, evaluate
 from tqdm import tqdm
-from MAGMutiModel import MAGMutiModel
 from doubleModle import ALBEF
 
 def validate(model, val_dataloader, epoch):
@@ -50,6 +49,7 @@ def train_and_validate(args):
     if args.model_name == 'model':
         model = MultiModal(args, pertrain)
         if args.part2_pertrain:
+            print('**********************loading part1 model**********************')
             checkpoint = torch.load(os.path.join(args.pertrain_mode_path_part1 ,'pretrain_epoch_4.bin'), map_location='cpu')
             model.load_state_dict(checkpoint['model_state_dict'])
     else:
@@ -139,6 +139,13 @@ def main():
     setup_seed(args)
 
     os.makedirs(args.savedmodel_path, exist_ok=True)
+    
+    if os.path.exists(args.pertrain_mode_path_part1) == False:
+        os.makedirs(args.pertrain_mode_path_part1)
+        
+    if os.path.exists(args.pertrain_mode_path_part2) == False:
+        os.makedirs(args.pertrain_mode_path_part2)
+    
     logging.info("Training/evaluation parameters: %s", args)
 
     train_and_validate(args)    
